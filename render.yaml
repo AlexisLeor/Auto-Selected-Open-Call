@@ -1,7 +1,13 @@
 services:
-- type: cron
-  name: veille-appels-art
-  env: python
-  schedule: "42 17 * * 1,4"
-  buildCommand: "pip install -r requirements.txt"
-  startCommand: "python main.py"
+  - type: cron
+    name: veille-open-calls
+    schedule: "50 17 * * *"  # Tous les jours à 19h30 heure française (17h30 UTC)
+    envVars:
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: BREVO_API_KEY
+        sync: false
+      - key: DEST_EMAIL
+        sync: false
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "python3 main.py"
