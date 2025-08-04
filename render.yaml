@@ -2,6 +2,6 @@ services:
 - type: cron
   name: veille-appels-art
   env: python
-  schedule: "38 17 * * 1,4"
+  schedule: "42 17 * * 1,4"
   buildCommand: "pip install -r requirements.txt"
   startCommand: "python main.py"
