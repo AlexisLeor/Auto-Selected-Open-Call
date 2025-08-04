@@ -1,7 +1,7 @@
 services:
   - type: cron
     name: veille-open-calls
-    schedule: "15 23 * * *"  # Tous les jours à 19h30 heure française (17h30 UTC)
+    schedule: "16 23 * * *"  # Tous les jours à 19h30 heure française (17h30 UTC)
     envVars:
       - key: OPENAI_API_KEY
         sync: false
