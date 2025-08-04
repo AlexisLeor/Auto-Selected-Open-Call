@@ -4,9 +4,9 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-BREVO_API_KEY = os.getenv("BREVO_API_KEY")
-EMAIL_FROM = os.getenv("EMAIL_FROM")
-EMAIL_TO = os.getenv("EMAIL_TO")
+BREVO_API_KEY = os.getenv("OPENAI_API_KEY")  # ou "BREVO_API_KEY" si tu l’as appelée comme ça dans Render
+EMAIL_FROM = os.getenv("MAIL_USER")
+EMAIL_TO = os.getenv("DEST_EMAIL")
 
 def send_email_via_brevo(subject, html_content):
     url = "https://api.brevo.com/v3/smtp/email"
