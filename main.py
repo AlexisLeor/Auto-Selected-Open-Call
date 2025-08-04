@@ -4,11 +4,21 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-BREVO_API_KEY = os.getenv("OPENAI_API_KEY")  # ou "BREVO_API_KEY" si tu l’as appelée comme ça dans Render
-EMAIL_FROM = os.getenv("MAIL_USER")
-EMAIL_TO = os.getenv("DEST_EMAIL")
+BREVO_API_KEY = os.getenv("BREVO_API_KEY")
+EMAIL_FROM = os.getenv("EMAIL_FROM")
+EMAIL_TO = os.getenv("EMAIL_TO")
 
 def send_email_via_brevo(subject, html_content):
+    if not BREVO_API_KEY:
+        print("❌ ERREUR: BREVO_API_KEY non trouvé")
+        return
+    if not EMAIL_FROM:
+        print("❌ ERREUR: EMAIL_FROM non trouvé")
+        return
+    if not EMAIL_TO:
+        print("❌ ERREUR: EMAIL_TO non trouvé")
+        return
+
     url = "https://api.brevo.com/v3/smtp/email"
     headers = {
         "accept": "application/json",
@@ -21,8 +31,9 @@ def send_email_via_brevo(subject, html_content):
         "subject": subject,
         "htmlContent": html_content
     }
+
     r = requests.post(url, headers=headers, json=data)
-    print("Email sent:", r.status_code, r.text)
+    print(f"✅ Email sent: {r.status_code} {r.text}")
 
 if __name__ == "__main__":
     send_email_via_brevo("Test Veille", "<h1>Ceci est un test</h1><p>Le script fonctionne bien via Brevo.</p>")
