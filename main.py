@@ -16,6 +16,10 @@ def main():
     if nouveaux or rappels:
         send_email(nouveaux, rappels)
         save_sent_ids([call['id'] for call in nouveaux + rappels])
+    else:
+        print("Aucun nouvel appel valide trouvé.")
+        # Optionnel : pour tester que l’envoi fonctionne même sans appel détecté
+        send_email([], [])  # à supprimer plus tard si tout fonctionne
 
 if __name__ == "__main__":
     main()
